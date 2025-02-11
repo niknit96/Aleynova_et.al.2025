@@ -1,0 +1,37 @@
+Sample	SRA	BioProject	Location_full	location	Plant	Organ_material	Year	Season	Species
+S_Pj_1	SRR32057061	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Needles	2023	Winter	P. jezoensis
+S_Pj_2	SRR32057060	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Needles	2023	Winter	P. jezoensis
+S_Pj_3	SRR32057049	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Branch	2023	Winter	P. jezoensis
+S_Pj_4	SRR32057030	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Branch	2023	Winter	P. jezoensis
+S_Pj_5	SRR32057043	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Shavings	2023	Winter	P. jezoensis
+S_Pj_6	SRR32057000	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Shavings	2023	Winter	P. jezoensis
+S_Pj_7	SRR32056997	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Needles	2023	Winter	P. jezoensis
+S_Pj_8	SRR32057026	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Needles	2023	Winter	P. jezoensis
+S_Pj_9	SRR32057023	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Branch	2023	Winter	P. jezoensis
+S_Pj_10	SRR32057022	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Branch	2023	Winter	P. jezoensis
+S_Pj_11	SRR32057059	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Shavings	2023	Winter	P. jezoensis
+S_Pj_12	SRR32057058	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Shavings	2023	Winter	P. jezoensis
+S_Pj_13	SRR32057057	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Shavings	2023	Summer	P. jezoensis
+S_Pj_14	SRR32057056	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Shavings	2023	Summer	P. jezoensis
+S_Pj_15	SRR32057055	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Needles	2023	Summer	P. jezoensis
+S_Pj_16	SRR32057054	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Needles	2023	Summer	P. jezoensis
+S_Pj_17	SRR32057053	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Branch	2023	Summer	P. jezoensis
+S_Pj_18	SRR32057052	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Branch	2023	Summer	P. jezoensis
+S_Pj_19	SRR32057051	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_1	Shavings	2023	Summer	P. jezoensis
+S_Pj_20	SRR32057050	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Needles	2023	Summer	P. jezoensis
+S_Pj_21	SRR32057048	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Needles	2023	Summer	P. jezoensis
+S_Pj_22	SRR32057047	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Branch	2023	Summer	P. jezoensis
+S_Pj_23	SRR32057046	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Branch	2023	Summer	P. jezoensis
+S_Pj_24	SRR32057037	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	Primorsky_Krai	Pj_2	Shavings	2023	Summer	P. jezoensis
+S_Pj_25	SRR32057036	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_3	Needles	2023	Autumn	P. jezoensis
+S_Pj_26	SRR32057035	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_3	Needles	2023	Autumn	P. jezoensis
+S_Pj_27	SRR32057034	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_3	Branch	2023	Autumn	P. jezoensis
+S_Pj_28	SRR32057033	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_3	Branch	2023	Autumn	P. jezoensis
+S_Pj_29	SRR32057032	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_3	Shavings	2023	Autumn	P. jezoensis
+S_Pj_30	SRR32057031	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_3	Shavings	2023	Autumn	P. jezoensis
+S_Pj_31	SRR32057021	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_4	Needles	2023	Autumn	P. jezoensis
+S_Pj_32	SRR32057020	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_4	Needles	2023	Autumn	P. jezoensis
+S_Pj_33	SRR32057019	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_4	Branch	2023	Autumn	P. jezoensis
+S_Pj_34	SRR32057018	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_4	Branch	2023	Autumn	P. jezoensis
+S_Pj_35	SRR32057017	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_4	Shavings	2023	Autumn	P. jezoensis
+S_Pj_36	SRR32057016	PRJNA1210692	Aniva urban district, Sakhalin region	Sakhalin_Oblast	Pj_4	Shavings	2023	Autumn	P. jezoensis

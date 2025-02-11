@@ -1,0 +1,23 @@
+Pj_1_Branch_Winter_Primorsky_Krai	Pj_1_Needles_Winter_Primorsky_Krai	Pj_1_Shavings_Winter_Primorsky_Krai	Pj_2_Branch_Summer_Primorsky_Krai	Pj_2_Branch_Winter_Primorsky_Krai	Pj_2_Needles_Summer_Primorsky_Krai	Pj_2_Shavings_Summer_Primorsky_Krai	Pj_3_Branch_Autumn_Sakhalin_Oblast	Pj_3_Needles_Autumn_Sakhalin_Oblast	Pj_3_Shavings_Autumn_Sakhalin_Oblast	Pj_4_Branch_Autumn_Sakhalin_Oblast	Pj_4_Needles_Autumn_Sakhalin_Oblast
+Cladosporium	1	0	0	0	0	0	0	0	0	0	6	0
+Daldinia	1	0	0	2	5	1	0	0	0	0	0	0
+Nemania	1	0	0	0	0	0	0	0	0	0	0	0
+Xylaria	2	4	0	0	6	0	0	1	0	0	0	0
+Paraconiothyrium	0	0	3	0	9	5	0	0	0	0	2	0
+Penicillium	0	0	3	0	2	0	0	0	0	1	0	0
+Anteaglonium	0	0	0	0	2	0	0	0	0	0	0	0
+Helminthosporium	0	0	0	0	1	0	0	0	0	0	0	0
+Juncaceicola	0	0	0	0	1	0	0	0	0	0	0	0
+Phaeosphaeria	0	0	0	0	2	0	0	0	0	0	0	0
+Coniochaeta	0	0	0	0	0	1	0	0	3	0	0	0
+Kuraishia	0	0	0	0	0	0	5	0	0	0	0	0
+Ogataea	0	0	0	0	0	0	1	0	0	0	0	0
+Pichia	0	0	0	0	0	0	12	0	0	0	0	0
+Arthrinium	0	0	0	0	0	0	0	1	1	0	0	0
+Fusarium	0	0	0	0	0	0	0	2	0	0	0	0
+Tolypocladium	0	0	0	0	0	0	0	1	0	0	0	0
+Venturia	0	0	0	0	0	0	0	1	0	0	0	0
+Colletotrichum	0	0	0	0	0	0	0	0	1	0	0	0
+Geopyxis	0	0	0	0	0	0	0	0	1	0	0	0
+Aspergillus	0	0	0	0	0	0	0	0	0	1	0	0
+Neosetophoma	0	0	0	0	0	0	0	0	0	0	0	1

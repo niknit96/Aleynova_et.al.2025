@@ -1,0 +1,25 @@
+Pj_1_Branch_Winter_Primorsky_Krai	Pj_1_Needles_Winter_Primorsky_Krai	Pj_1_Shavings_Summer_Primorsky_Krai	Pj_1_Shavings_Winter_Primorsky_Krai	Pj_2_Branch_Autumn_Primorsky_Krai	Pj_2_Branch_Summer_Primorsky_Krai	Pj_2_Branch_Winter_Primorsky_Krai	Pj_2_Needles_Winter_Primorsky_Krai	Pj_2_Shavings_Summer_Primorsky_Krai	Pj_2_Shavings_Winter_Primorsky_Krai	Pj_3_Branch_Autumn_Sakhalin_Oblast	Pj_3_Needles_Autumn_Sakhalin_Oblast	Pj_3_Shavings_Autumn_Sakhalin_Oblast	Pj_4_Branch_Autumn_Sakhalin_Oblast	Pj_4_Needles_Autumn_Sakhalin_Oblast	Pj_4_Shavings_Autumn_Sakhalin_Oblast
+Bacillus	30	21	0	17	0	13	15	20	0	24	0	3	0	0	0	0
+Paenibacillus	1	0	0	0	0	0	0	0	0	0	4	0	0	0	2	0
+Pseudomonas	0	0	20	0	1	1	0	0	0	0	1	2	0	15	0	15
+Burkholderia	0	0	0	0	0	2	0	0	0	0	5	0	0	0	0	0
+Caballeronia	0	0	0	0	0	4	0	0	0	0	11	1	2	0	0	0
+Peribacillus	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0
+Priestia	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
+Curtobacterium	0	0	0	0	0	0	0	0	1	0	3	0	0	0	0	0
+Erwinia	0	0	0	0	0	0	0	0	4	0	1	0	0	0	0	25
+Novosphingobium	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0
+Pantoea	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0
+Pseudoxanthomonas	0	0	0	0	0	0	0	0	6	0	0	0	0	0	0	0
+Rhizobium	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0
+Amantichitinum	0	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0
+Luteibacter	0	0	0	0	0	0	0	0	0	0	4	0	0	0	0	0
+Lysinimonas	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+Paraburkholderia	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+Pinirhizobacter	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0
+Plantibacter	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0
+Sphingomonas	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+Pseudarthrobacter	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Duganella	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+Brevundimonas	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
+Micrococcus	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
