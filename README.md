@@ -22,7 +22,7 @@ bash ./Aleynova_et.al.2025-main/download.sh
 mamba env create --file ./Aleynova_et.al.2025-main/Aleynova_et.al.2025.yml || conda env create --file ./Aleynova_et.al.2025-main/Aleynova_et.al.2025.yml
 mamba activate Aleynova_et.al.2025 || conda activate Aleynova_et.al.2025
 ```
-6. Download and install qiime2R and microViz packages (accessed on 23 January 2025):
+6. Download and install qiime2R and microViz packages (accessed on 11 February 2025):
 ```
 Rscript -e 'devtools::install_github("jbisanz/qiime2R")'
 Rscript -e 'devtools::install_github("david-barnett/microViz")'
