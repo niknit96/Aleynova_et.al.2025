@@ -97,6 +97,7 @@ Rscript $DIR/ITS/upset_ITS_sow.r
 Rscript $DIR/ITS/heatmap_ITS.r
 Rscript $DIR/ITS/alpha_ITS.r
 Rscript $DIR/ITS/beta_ITS.r
+Rscript $DIR/ITS/funguild.r
 
 
 
