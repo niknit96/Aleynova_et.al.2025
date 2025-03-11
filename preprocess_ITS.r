@@ -44,6 +44,16 @@ for(Swap in Swap_unidentified) {
     }
 }
 
+tax_meta$Class = str_replace_all(tax_meta$Class, "p__.*", paste(tax_meta$Class, "un."))
+tax_meta$Order = str_replace_all(tax_meta$Order, "p__.*", paste(tax_meta$Order, "un."))
+tax_meta$Order = str_replace_all(tax_meta$Order, "c__.*", paste(tax_meta$Order, "un."))
+tax_meta$Family = str_replace_all(tax_meta$Family, "p__.*", paste(tax_meta$Family, "un."))
+tax_meta$Family = str_replace_all(tax_meta$Family, "c__.*", paste(tax_meta$Family, "un."))
+tax_meta$Family = str_replace_all(tax_meta$Family, "o__.*", paste(tax_meta$Family, "un."))
+tax_meta$Genus = str_replace_all(tax_meta$Genus, "p__.*", paste(tax_meta$Genus, "un."))
+tax_meta$Genus = str_replace_all(tax_meta$Genus, "c__.*", paste(tax_meta$Genus, "un."))
+tax_meta$Genus = str_replace_all(tax_meta$Genus, "o__.*", paste(tax_meta$Genus, "un."))
+tax_meta$Genus = str_replace_all(tax_meta$Genus, "f__.*", paste(tax_meta$Genus, "un."))
 
 #
 
