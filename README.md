@@ -10,7 +10,7 @@ cd ./Aleynova_et.al.2025-main
 ```
 3. Download Apptainer container:
 ```
-wget https://biosoil.ru/downloads/biotech/Containers%20(Apptainer)/r-niknit_V3.sif
+wget https://files.sberdisk.ru/s/w8Cx8CNLzCWScgW
 ```
 4. Run container and R scripts:
 ```
