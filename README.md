@@ -1,6 +1,6 @@
 To repeat the data from this article, follow these steps:
 
-1. Install Apptainer on Linux:
+1. Install Apptainer:
 ```
 https://apptainer.org/docs/admin/main/installation.html
 ```
