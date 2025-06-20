@@ -1,0 +1,36 @@
+SRA	BioProject	Location	Longitude	Latitude	Location (short name)	Plant	Organ material	Year	Season
+SSRR32057061	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Needles	2023	Winter
+SSRR32057060	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Needles	2023	Winter
+SSRR32057049	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Branch	2023	Winter
+SSRR32057030	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Branch	2023	Winter
+SSRR32057043	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Shavings	2023	Winter
+SSRR32057000	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Shavings	2023	Winter
+SSRR32056997	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Needles	2023	Winter
+SSRR32057026	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Needles	2023	Winter
+SSRR32057023	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Branch	2023	Winter
+SSRR32057022	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Branch	2023	Winter
+SSRR32057059	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Shavings	2023	Winter
+SSRR32057058	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Shavings	2023	Winter
+SSRR32057057	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Shavings	2023	Summer
+SSRR32057056	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Shavings	2023	Summer
+SSRR32057055	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Needles	2023	Summer
+SSRR32057054	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Needles	2023	Summer
+SSRR32057053	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Branch	2023	Summer
+SSRR32057052	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Branch	2023	Summer
+SSRR32057051	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_1	Shavings	2023	Summer
+SSRR32057050	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Needles	2023	Summer
+SSRR32057048	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Needles	2023	Summer
+SSRR32057047	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Branch	2023	Summer
+SSRR32057046	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Branch	2023	Summer
+SSRR32057037	PRJNA1210692	selo Ivanovka, Mikhaylovskiy rayon, Primorye Territory	43.8715338387169 	132.79473502372	Primorsky Krai	Pj_2	Shavings	2023	Summer
+SSRR32057036	PRJNA1210692	Aniva urban district, Sakhalin region	47.057867	142.130470 	Sakhalin Oblast	Pj_3	Needles	2023	Autumn
+SSRR32057035	PRJNA1210692	Aniva urban district, Sakhalin region	47.057868	142.130471	Sakhalin Oblast	Pj_3	Needles	2023	Autumn
+SSRR32057034	PRJNA1210692	Aniva urban district, Sakhalin region	47.057869	142.130472	Sakhalin Oblast	Pj_3	Branch	2023	Autumn
+SSRR32057033	PRJNA1210692	Aniva urban district, Sakhalin region	47.057870	142.130473	Sakhalin Oblast	Pj_3	Branch	2023	Autumn
+SSRR32057031	PRJNA1210692	Aniva urban district, Sakhalin region	47.057872	142.130475	Sakhalin Oblast	Pj_3	Shavings	2023	Autumn
+SSRR32057021	PRJNA1210692	Aniva urban district, Sakhalin region	46.858812	143.107846	Sakhalin Oblast	Pj_4	Needles	2023	Autumn
+SSRR32057020	PRJNA1210692	Aniva urban district, Sakhalin region	46.858813	143.107847	Sakhalin Oblast	Pj_4	Needles	2023	Autumn
+SSRR32057019	PRJNA1210692	Aniva urban district, Sakhalin region	46.858814	143.107848	Sakhalin Oblast	Pj_4	Branch	2023	Autumn
+SSRR32057018	PRJNA1210692	Aniva urban district, Sakhalin region	46.858815	143.107849	Sakhalin Oblast	Pj_4	Branch	2023	Autumn
+SSRR32057017	PRJNA1210692	Aniva urban district, Sakhalin region	46.858816	143.107850	Sakhalin Oblast	Pj_4	Shavings	2023	Autumn
+SSRR32057016	PRJNA1210692	Aniva urban district, Sakhalin region	46.858817	143.107851	Sakhalin Oblast	Pj_4	Shavings	2023	Autumn
