@@ -20,7 +20,7 @@ cd ./Aleynova_et.al.2025-main
 ```
 5. Run R scripts:
 ```
-Rscript -e 'rmarkdown::render("./16S/16S_new.Rmd", output_file="../16S_NGS_report.html")' \
+Rscript -e 'rmarkdown::render("./16S/16S_new.Rmd", output_file="../16S_NGS_report.html")'
 Rscript -e 'rmarkdown::render("./ITS/ITS_new.Rmd", output_file="../ITS_NGS_report.html")'
 ```
 6. Results in ./Aleynova_et.al.2025-main.
