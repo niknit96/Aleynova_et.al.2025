@@ -24,10 +24,16 @@ library(RColorBrewer)
 library(microViz)
 library(ggsankey)
 library(ComplexHeatmap)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(forcats)
 ```
 ## Load phyloseq object
 ```{r}
 physeq <- readRDS("physeq_ITS_187.rds")
+asv = Biostrings::readDNAStringSet("asv.fasta")
+physeq = merge_phyloseq(physeq, asv)
 ```
 ```{r}
 metadata <- read.table("sampledata_ITS_meta.txt", header = T, row.names = 1, sep = "\t")
@@ -35,6 +41,7 @@ sample_data(physeq) <- metadata
 stats_dada2 = readRDS("stats_dada2_ITS.rds")
 metadata = merge(metadata, stats_dada2, by=0, all.x=TRUE)
 rownames(metadata) = metadata[,1]
+metadata$Tree_parts = factor(metadata$Tree_parts, c("Branch", "Needles", "Fresh_wood")) 
 sample_data(physeq) <- metadata
 ```
 ## Transform phyloseq object to microtable class
@@ -128,13 +135,13 @@ meco_rf$tidy_dataset()
 ```{r}
 tmp <- clone(meco_rf)
 ```
-## Shannon (Organ.material)
+## Shannon (Tree_parts)
 ```{r fig.width=5, fig.height=6}
-t1 <- trans_alpha$new(dataset = tmp, group = "Organ.material")
+t1 <- trans_alpha$new(dataset = tmp, group = "Tree_parts")
 t1$cal_diff(method = "anova")
 t1$plot_alpha(measure = "Shannon") +
 	scale_y_continuous(breaks = c(0,1,2,3,4,5,6), limits = c(2,6))
-ggsave("../fig 6a. Shannon (Organ.material) (ITS).png", width=3, height=4, dpi=400)
+ggsave("../fig 7a. Shannon (Tree_parts) (ITS).png", width=3, height=4, dpi=400)
 ```
 ## Shannon (Season)
 ```{r fig.width=5, fig.height=6}
@@ -142,15 +149,15 @@ t1 <- trans_alpha$new(dataset = tmp, group = "Season")
 t1$cal_diff(method = "anova")
 t1$plot_alpha(measure = "Shannon") +
 	scale_y_continuous(breaks = c(0,1,2,3,4,5,6), limits = c(2,6))
-ggsave("../fig 6b. Shannon (Season) (ITS).png", width=3, height=4, dpi=400)
+ggsave("../fig 7b. Shannon (Season) (ITS).png", width=3, height=4, dpi=400)
 ```
-## Shannon (Plant)
+## Shannon (Tree_specimens)
 ```{r fig.width=5, fig.height=6}
-t1 <- trans_alpha$new(dataset = tmp, group = "Plant")
+t1 <- trans_alpha$new(dataset = tmp, group = "Tree_specimens")
 t1$cal_diff(method = "anova")
 t1$plot_alpha(measure = "Shannon") +
 	scale_y_continuous(breaks = c(0,1,2,3,4,5,6), limits = c(2,6))
-ggsave("../fig 6c. Shannon (Plant) (ITS).png", width=3, height=4, dpi=400)
+ggsave("../fig 7c. Shannon (Tree_specimens) (ITS).png", width=3, height=4, dpi=400)
 ```
 
 # Beta diversity
@@ -160,32 +167,34 @@ tmp$filter_taxa(rel_abund = 0.001, freq = 0.2)
 tmp$tidy_dataset()
 tmp$cal_betadiv()
 ```
-## Bray-curtis (Organ.material)
+## Bray-curtis (Tree_parts)
 ```{r fig.width=6, fig.height=6}
-t1 <- trans_beta$new(dataset = tmp, group = "Organ.material", measure = "bray")
+t1 <- trans_beta$new(dataset = tmp, group = "Tree_parts", measure = "bray")
 t1$cal_ordination(method = "PCoA")
-t1$plot_ordination(plot_color = "Organ.material", plot_shape = "Plant", plot_type = c("point", "ellipse")) + 
+t1$plot_ordination(plot_color = "Tree_parts", plot_shape = "Tree_specimens", plot_type = c("point", "ellipse")) + 
 	guides(
 		color = guide_legend(order = 1),
 		fill = guide_legend(order = 1),
 		shape = guide_legend(order = 2)
 	) + 
 	labs(
-		color = "Organ material",
-		fill = "Organ material"
+		color = "Tree_parts",
+		fill = "Tree_parts"
 	)
-ggsave("../fig 6d. Bray-curtis (Organ.material) (ITS).png", width=4, height=4, dpi=400)
+ggsave("../fig 7d. Bray-curtis (Tree_parts) (ITS).png", width=4, height=4, dpi=400)
 ```
-## PERMANOVA (Organ.material)
+## PERMANOVA (Tree_parts)
 ```{r }
-t1$cal_manova(group = "Organ.material", manova_all = F)
+t1$cal_manova(group = "Tree_parts", manova_all = F)
+kable(t1$res_manova)
+t1$cal_manova(group = "Tree_parts", manova_all = T)
 kable(t1$res_manova)
 ```
 ## Bray-curtis (Season)
 ```{r fig.width=6, fig.height=6}
 t1 <- trans_beta$new(dataset = tmp, group = "Season", measure = "bray")
 t1$cal_ordination(method = "PCoA")
-t1$plot_ordination(plot_color = "Season", plot_shape = "Plant", plot_type = c("point", "ellipse")) + 
+t1$plot_ordination(plot_color = "Season", plot_shape = "Tree_specimens", plot_type = c("point", "ellipse")) + 
 	guides(
 		color = guide_legend(order = 1),
 		fill = guide_legend(order = 1),
@@ -195,61 +204,170 @@ t1$plot_ordination(plot_color = "Season", plot_shape = "Plant", plot_type = c("p
 		color = "Season",
 		fill = "Season"
 	)
-ggsave("../fig 6e. Bray-curtis (Season) (ITS).png", width=4, height=4, dpi=400)
+ggsave("../fig 7e. Bray-curtis (Season) (ITS).png", width=4, height=4, dpi=400)
 ```
 ## PERMANOVA (Season)
 ```{r }
 t1$cal_manova(group = "Season", manova_all = F)
 kable(t1$res_manova)
 ```
-## Bray-curtis (Plant)
+## Bray-curtis (Tree_specimens)
 ```{r fig.width=6, fig.height=6}
-t1 <- trans_beta$new(dataset = tmp, group = "Plant", measure = "bray")
+t1 <- trans_beta$new(dataset = tmp, group = "Tree_specimens", measure = "bray")
 t1$cal_ordination(method = "PCoA")
-t1$plot_ordination(plot_color = "Plant", plot_shape = "Organ.material", plot_type = c("point", "ellipse")) + 
+t1$plot_ordination(plot_color = "Tree_specimens", plot_shape = "Tree_parts", plot_type = c("point", "ellipse")) + 
 	guides(
 		color = guide_legend(order = 1),
 		fill = guide_legend(order = 1),
 		shape = guide_legend(order = 2)
 	) + 
 	labs(
-		color = "Plant",
-		fill = "Plant"
+		color = "Tree_specimens",
+		fill = "Tree_specimens"
 	)
-ggsave("../fig 6f. Bray-curtis (Plant) (ITS).png", width=4, height=4, dpi=400)
+ggsave("../fig 7f. Bray-curtis (Tree_specimens) (ITS).png", width=4, height=4, dpi=400)
 ```
-## PERMANOVA (Plant)
+## PERMANOVA (Tree_specimens)
 ```{r }
-t1$cal_manova(group = "Plant", manova_all = F)
+t1$cal_manova(group = "Tree_specimens", manova_all = F)
 kable(t1$res_manova)
 ```
 
+# ASV table
+```{r}
+tmp <- clone(meco_rf)
+tmp$filter_taxa(rel_abund = 0.001, freq = 0.2)
+ASV = as.data.frame(tmp$rep_fasta)
+ASV$ASV = rownames(ASV)
+Taxonomy = tmp$tax_table
+Taxonomy$ASV = rownames(Taxonomy)
+ASV = left_join(ASV, Taxonomy, by = "ASV")
+ASV = as_tibble(ASV)
+
+bar = clone(tmp)
+bar = bar$merge_samples("Tree_parts")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Species", ntaxa = 1000, delete_taxonomy_prefix = F)
+
+Tree_parts = pivot_wider(t1$data_abund[,c("Taxonomy", "Sample", "Abundance")], names_from = "Sample", values_from = "Abundance")
+colnames(Tree_parts) = c("Species", "Needles", "Fresh_wood", "Branch")
+
+bar = clone(tmp)
+bar = bar$merge_samples("Season")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Species", ntaxa = 1000, delete_taxonomy_prefix = F)
+
+Season = pivot_wider(t1$data_abund[,c("Taxonomy", "Sample", "Abundance")], names_from = "Sample", values_from = "Abundance")
+colnames(Season) = c("Species", "Summer", "Winter")
+
+bar = clone(tmp)
+bar = bar$merge_samples("Tree_specimens")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Species", ntaxa = 1000, delete_taxonomy_prefix = F)
+
+Tree_specimens = pivot_wider(t1$data_abund[,c("Taxonomy", "Sample", "Abundance")], names_from = "Sample", values_from = "Abundance")
+colnames(Tree_specimens) = c("Species", "Pj_1", "Pj_2")
+
+ASV = left_join(ASV, Tree_parts, by = "Species")
+ASV = left_join(ASV, Season, by = "Species")
+ASV = left_join(ASV, Tree_specimens, by = "Species")
+ASV = ASV[, c("x", "Kingdom","Phylum","Class","Order","Family","Genus","Species","Needles","Fresh_wood","Branch","Summer","Winter","Pj_1","Pj_2")]
+colnames(ASV) = c("DNA sequence", "Kingdom","Phylum","Class","Order","Family","Genus","ASV","Needles","Fresh wood","Branch","Summer","Winter","Pj_1","Pj_2")
+
+ASV[, !names(ASV) %in% "ASV"] = as_tibble(apply(ASV[, !names(ASV) %in% "ASV"], 2, function(x) str_replace_all(x, ".*un\\.", "__")))
+ASV$ASV = str_replace_all(ASV$ASV, " un.", "")
+
+write.table(ASV, "../Table S9. ASVs (ITS).txt", quote = F, sep = "\t")
+```
 
 # Composition
 ```{r}
 tmp <- clone(meco_rf)
 tmp$filter_taxa(rel_abund = 0.001, freq = 0.2)
+tmp$tax_table$Class = str_replace_all(tmp$tax_table$Class, "k__.*", "k__")
+tmp$tax_table$Class = str_replace_all(tmp$tax_table$Class, "p__.*", "p__")
+tmp$tax_table$Family = str_replace_all(tmp$tax_table$Family, "k__.*", "k__")
+tmp$tax_table$Family = str_replace_all(tmp$tax_table$Family, "p__.*", "p__")
+tmp$tax_table$Family = str_replace_all(tmp$tax_table$Family, "c__.*", "c__")
+tmp$tax_table$Family = str_replace_all(tmp$tax_table$Family, "o__.*", "o__")
+tmp$tax_table$Order = str_replace_all(tmp$tax_table$Order, "k__.*", "k__")
+tmp$tax_table$Order = str_replace_all(tmp$tax_table$Order, "p__.*", "p__")
+tmp$tax_table$Order = str_replace_all(tmp$tax_table$Order, "c__.*", "c__")
 tmp$tidy_dataset()
-
 ```
-## Organ material bar plot (Phylum)
+
+
+
+## Tree_parts bar plot (Class)
 ```{r}
 bar = clone(tmp)
-bar = bar$merge_samples("Organ.material")
+bar = bar$merge_samples("Tree_parts")
 t1 <- trans_abund$new(dataset = bar, taxrank = "Class", ntaxa = 10, delete_taxonomy_prefix = F)
 ```
 ```{r fig.width=5, fig.height=6}
-t1$plot_bar(others_color = "grey70", xtext_keep = TRUE, legend_text_italic = FALSE,
-color_values = mycolors,
-order_x = c("Branch", "Needles", "Shavings")) +
+barplot <- function(order_x, order_tax, path) {
+
+p = t1$plot_bar(others_color = "grey70", xtext_keep = TRUE, legend_text_italic = FALSE,
+	color_values = mycolors,
+	order_x = order_x, xtext_angle = 45) +
 geom_text(aes(x = Sample, y = Abundance, 
-		label = ifelse(Abundance > 2, scales::percent(Abundance, scale = 1, accuracy = 1), ""), 
-		group = Taxonomy), 
-		inherit.aes = FALSE, position = position_stack(vjust = 0.5), col = "black")
-ggsave("../fig 7a. Organ material bar plot (Class) (ITS).png", width=5, height=6, dpi=400)
+		label = ifelse(Abundance > 5, scales::percent(Abundance, scale = 1, accuracy = 1), ""), 
+		group = Taxonomy),
+		inherit.aes = FALSE, position = position_stack(vjust = 0.5), col = "black") +
+scale_fill_manual(
+    values = c(mycolors[1:length(order_tax)-1], "grey70"),
+    breaks = order_tax) +
+guides(fill = guide_legend(reverse = TRUE))
+
+legend <- get_legend(p)
+plot_without_legend <- p + theme(legend.position = "none")
+
+ggarrange(plot_without_legend)
+ggsave(paste0(path, ".png"), width=2, height=4, dpi=400)
+
+ggarrange(legend)
+ggsave(paste0(path, " legend.png"), width=2, height=4, dpi=400)
+
+}
+
+path = "../fig 8a. Tree_parts bar plot (Class) (ITS)"
+order_x = c("Branch", "Needles", "Fresh_wood")
+order_tax = c("c__Dothideomycetes", "c__Sordariomycetes", "c__Eurotiomycetes", 
+	"c__Leotiomycetes", "c__Malasseziomycetes", "c__Lecanoromycetes",
+	"c__Tremellomycetes", "c__Agaricomycetes", "Others")
+barplot(order_x, order_tax, path)
 ```
 
-## Organ material venn diagramm
+## Tree_parts bar plot (Order)
+```{r}
+bar = clone(tmp)
+bar = bar$merge_samples("Tree_parts")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Order", ntaxa = 10, delete_taxonomy_prefix = F)
+```
+```{r fig.width=5, fig.height=6}
+path = "../fig 8d. Tree_parts bar plot (Order) (ITS)"
+order_x = c("Branch", "Needles", "Fresh_wood")
+order_tax = c("o__Mycosphaerellales", "o__Pleosporales", "o__Venturiales", 
+	"o__Xylariales", "o__Capnodiales", "o__Chaetothyriales",
+	"o__Helotiales", "o__Eurotiales", "o__Malasseziales",
+	"o__Mytilinidiales", "Others")
+barplot(order_x, order_tax, path)
+```
+
+## Tree_parts bar plot (Family)
+```{r}
+bar = clone(tmp)
+bar = bar$merge_samples("Tree_parts")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Family", ntaxa = 10, delete_taxonomy_prefix = F)
+```
+```{r fig.width=5, fig.height=6}
+path = "../fig 8g. Tree_parts bar plot (Family) (ITS)"
+order_x = c("Branch", "Needles", "Fresh_wood")
+order_tax = c("f__Teratosphaeriaceae", "f__Venturiaceae", "f__Cylindrosympodiaceae",
+	"f__Lentitheciaceae", "f__Trichomeriaceae", "f__Anteagloniaceae",
+	"f__Aspergillaceae", "f__Malasseziaceae", "f__Mytilinidiaceae",
+	"f__Teloschistaceae", "Others")
+barplot(order_x, order_tax, path)
+```
+
+## Tree_parts venn diagramm
 ```{r fig.width=5, fig.height=5}
 ven = clone(bar)
 
@@ -263,13 +381,12 @@ rownames(ven$tax_table) = ven$tax_table$Species
 rownames(ven$otu_table) = ven$tax_table$Species
 t1 <- trans_venn$new(ven, ratio = "seqratio")
 t1$plot_venn()
-ggsave("../fig 7d. Organ material venn diagramm (ASV) (ITS).png", width=5, height=5, dpi=400)
+ggsave("../fig 9a. Tree_parts venn diagramm (ASV) (ITS).png", width=5, height=5, dpi=400)
 ```
 ```{r}
 datatable(t1$data_details, options = list(scrollX = TRUE, scrollY = TRUE))
-write.table(t1$data_details, sep = "\t", quote = FALSE, file="Organ material venn diagramm (ASV) (ITS).txt")
+write.table(t1$data_details, sep = "\t", quote = FALSE, file="Tree_parts venn diagramm (ASV) (ITS).txt")
 ```
-
 
 ## Season bar plot (Class)
 ```{r}
@@ -278,14 +395,44 @@ bar = bar$merge_samples("Season")
 t1 <- trans_abund$new(dataset = bar, taxrank = "Class", ntaxa = 10, delete_taxonomy_prefix = F)
 ```
 ```{r fig.width=5, fig.height=6}
-t1$plot_bar(others_color = "grey70", xtext_keep = TRUE, legend_text_italic = FALSE,
-color_values = mycolors,
-order_x = c("Summer", "Winter")) +
-geom_text(aes(x = Sample, y = Abundance, 
-		label = ifelse(Abundance > 2, scales::percent(Abundance, scale = 1, accuracy = 1), ""), 
-		group = Taxonomy), 
-		inherit.aes = FALSE, position = position_stack(vjust = 0.5), col = "black")
-ggsave("../fig 7b. Season bar plot (Class) (ITS).png", width=5, height=6, dpi=400)
+path = "../fig 8b. Season bar plot (Class) (ITS)"
+order_x = c("Summer", "Winter")
+order_tax = c("c__Dothideomycetes", "c__Sordariomycetes", "c__Eurotiomycetes", 
+	"c__Leotiomycetes", "c__Malasseziomycetes", "c__Lecanoromycetes",
+	"c__Tremellomycetes", "c__Agaricomycetes", "Others")
+barplot(order_x, order_tax, path)
+```
+
+## Season bar plot (Order)
+```{r}
+bar = clone(tmp)
+bar = bar$merge_samples("Season")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Order", ntaxa = 10, delete_taxonomy_prefix = F)
+```
+```{r fig.width=5, fig.height=6}
+path = "../fig 8e. Season bar plot (Order) (ITS)"
+order_x = c("Summer", "Winter")
+order_tax = c("o__Mycosphaerellales", "o__Pleosporales", "o__Venturiales", 
+	"o__Xylariales", "o__Capnodiales", "o__Chaetothyriales",
+	"o__Helotiales", "o__Eurotiales", "o__Malasseziales",
+	"o__Mytilinidiales", "Others")
+barplot(order_x, order_tax, path)
+```
+
+## Season bar plot (Family)
+```{r}
+bar = clone(tmp)
+bar = bar$merge_samples("Season")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Family", ntaxa = 10, delete_taxonomy_prefix = F)
+```
+```{r fig.width=5, fig.height=6}
+path = "../fig 8h. Season bar plot (Family) (ITS)"
+order_x = c("Summer", "Winter")
+order_tax = c("f__Teratosphaeriaceae", "f__Venturiaceae", "f__Cylindrosympodiaceae",
+	"f__Lentitheciaceae", "f__Trichomeriaceae", "f__Anteagloniaceae",
+	"f__Aspergillaceae", "f__Malasseziaceae", "f__Mytilinidiaceae",
+	"f__Teloschistaceae", "Others")
+barplot(order_x, order_tax, path)
 ```
 
 ## Season venn diagramm
@@ -302,30 +449,61 @@ rownames(ven$tax_table) = ven$tax_table$Species
 rownames(ven$otu_table) = ven$tax_table$Species
 t1 <- trans_venn$new(ven, ratio = "seqratio")
 t1$plot_venn()
-ggsave("../fig 7e. Season venn diagramm (ASV) (ITS).png", width=5, height=5, dpi=400)
+ggsave("../fig 9b. Season venn diagramm (ASV) (ITS).png", width=5, height=5, dpi=400)
 ```
 ```{r}
 datatable(t1$data_details, options = list(scrollX = TRUE, scrollY = TRUE))
 write.table(t1$data_details, sep = "\t", quote = FALSE, file="Season venn diagramm (ASV) (ITS).txt")
 ```
-## Plant bar plot (Class)
+
+## Tree_specimens bar plot (Class)
 ```{r}
 bar = clone(tmp)
-bar = bar$merge_samples("Plant")
+bar = bar$merge_samples("Tree_specimens")
 t1 <- trans_abund$new(dataset = bar, taxrank = "Class", ntaxa = 10, delete_taxonomy_prefix = F)
 ```
 ```{r fig.width=5, fig.height=6}
-t1$plot_bar(others_color = "grey70", xtext_keep = TRUE, legend_text_italic = FALSE,
-color_values = mycolors,
-order_x = c("Pj_1", "Pj_2")) +
-geom_text(aes(x = Sample, y = Abundance, 
-		label = ifelse(Abundance > 2, scales::percent(Abundance, scale = 1, accuracy = 1), ""), 
-		group = Taxonomy), 
-		inherit.aes = FALSE, position = position_stack(vjust = 0.5), col = "black")
-ggsave("../fig 7c. Plant bar plot (Phylum) (ITS).png", width=5, height=6, dpi=400)
+path = "../fig 8c. Tree_specimens bar plot (Class) (ITS)"
+order_x = c("Pj_1", "Pj_2")
+order_tax = c("c__Dothideomycetes", "c__Sordariomycetes", "c__Eurotiomycetes", 
+	"c__Leotiomycetes", "c__Malasseziomycetes", "c__Lecanoromycetes",
+	"c__Tremellomycetes", "c__Agaricomycetes", "Others")
+barplot(order_x, order_tax, path)
 ```
 
-## Plant venn diagramm
+## Tree_specimens bar plot (Order)
+```{r}
+bar = clone(tmp)
+bar = bar$merge_samples("Tree_specimens")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Order", ntaxa = 10, delete_taxonomy_prefix = F)
+```
+```{r fig.width=5, fig.height=6}
+path = "../fig 8f. Tree_specimens bar plot (Order) (ITS)"
+order_x = c("Pj_1", "Pj_2")
+order_tax = c("o__Mycosphaerellales", "o__Pleosporales", "o__Venturiales", 
+	"o__Xylariales", "o__Capnodiales", "o__Chaetothyriales",
+	"o__Helotiales", "o__Eurotiales", "o__Malasseziales",
+	"o__Mytilinidiales", "Others")
+barplot(order_x, order_tax, path)
+```
+
+## Tree_specimens bar plot (Family)
+```{r}
+bar = clone(tmp)
+bar = bar$merge_samples("Tree_specimens")
+t1 <- trans_abund$new(dataset = bar, taxrank = "Family", ntaxa = 10, delete_taxonomy_prefix = F)
+```
+```{r fig.width=5, fig.height=6}
+path = "../fig 8i. Tree_specimens bar plot (Family) (ITS)"
+order_x = c("Pj_1", "Pj_2")
+order_tax = c("f__Teratosphaeriaceae", "f__Venturiaceae", "f__Cylindrosympodiaceae",
+	"f__Lentitheciaceae", "f__Trichomeriaceae", "f__Anteagloniaceae",
+	"f__Aspergillaceae", "f__Malasseziaceae", "f__Mytilinidiaceae",
+	"f__Teloschistaceae", "Others")
+barplot(order_x, order_tax, path)
+```
+
+## Tree_specimens venn diagramm
 ```{r fig.width=5, fig.height=5}
 ven = clone(bar)
 
@@ -339,48 +517,17 @@ rownames(ven$tax_table) = ven$tax_table$Species
 rownames(ven$otu_table) = ven$tax_table$Species
 t1 <- trans_venn$new(ven, ratio = "seqratio")
 t1$plot_venn()
-ggsave("../fig 7f. Plant venn diagramm (ASV) (ITS).png", width=5, height=5, dpi=400)
+ggsave("../fig 9c. Tree_specimens venn diagramm (ASV) (ITS).png", width=5, height=5, dpi=400)
 ```
 ```{r}
 datatable(t1$data_details, options = list(scrollX = TRUE, scrollY = TRUE))
-write.table(t1$data_details, sep = "\t", quote = FALSE, file="Plant venn diagramm (ITS) (16S).txt")
+write.table(t1$data_details, sep = "\t", quote = FALSE, file="Tree_specimens venn diagramm (ASV) (ITS).txt")
 ```
 
-## ASVs summary
-```{r}
-length(rownames(tmp$tax_table))
-```
-```{r}
-k = tmp$tax_table %>%
-	group_by(Genus) %>%
-	reframe(num = length(Genus)) %>%
-	arrange(desc(num)) %>%
-	mutate(group = paste0(Genus, " (", num, " ASVs)"))
-```
-```{r}
-separate_wider_delim(k, cols = "Genus", names_sep = "_", delim  = "__") %>%
-	group_by(Genus_1) %>%
-	reframe(num = sum(num))
-```
-```{r}
-tmp$tax_table %>%
-	group_by(Genus) %>%
-	reframe(num = length(Genus)) %>%
-	arrange(desc(num)) %>%
-	mutate(group = paste0(Genus, " (", num, " ASVs)"))
-```
-```{r}
-tmp$tax_table %>%
-	group_by(Genus) %>%
-	reframe(num = length(Genus)) %>%
-	arrange(desc(num)) %>%
-	mutate(group = paste0(Genus, " (", num, " ASVs)")) %>%
-	as.data.frame()
-```
-
-## Core taxa
+## Core genera
 ```{r}
 core = clone(tmp)
+
 tax = as.data.frame(core$tax_table[,"Class_Genus"])
 rownames(tax) = rownames(core$tax_table)
 colnames(tax) = "Class_Genus"
@@ -389,12 +536,15 @@ core = core$merge_taxa("Class_Genus")
 
 core <- meco2phyloseq(core)
 pseq.rel <- microbiome::transform(core, "compositional")
+
 taxa_names(pseq.rel) = tax_table(pseq.rel)[,"Class_Genus"]
 
+pseq.rel = subset_taxa(pseq.rel, !(Class_Genus %in% str_extract(tax_table(pseq.rel)[,"Class_Genus"], ".*un.")))
+
 # Core with compositionals:
-prevalences <- seq(.05, 1, .05)
-detections <- round(10^seq(log10(1e-2), log10(.2), length = 10), 3)
-# detections <- c(0.005, round(10^seq(log10(1e-2), log10(.2), length = 10), 3))
+prevalences <- seq(.00, 1, .1)
+# detections <- round(10^seq(log10(1e-2), log10(.2), length = 20), 3)
+detections <- c(0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.10, 0.12, 0.14, 0.16)
 
 # Also define gray color palette
 gray <- gray(seq(0,1,length=5))
@@ -406,12 +556,14 @@ p1 <- plot_core(pseq.rel,
   detections = detections, min.prevalence = .5) +
   xlab("Detection Threshold (Relative Abundance (%))")
 
-p1 <- p1 + theme_bw() + ylab("Taxa")
+p1 <- p1 + theme_bw() + ylab("Taxa") + scale_x_discrete(labels = paste0(round(detections * 100, 0), "%")) +
+	scale_fill_gradientn(labels = scales::percent, breaks = prevalences, colours = rev(brewer.pal(5, "RdBu")),
+    values = c(0, 0.25, 0.5, 0.75, 1))
 p1
-ggsave("../fig 8. core (ITS).png", width=8, height=5, dpi=400)
+ggsave("../fig 10. core (ITS).png", width=8, height=3, dpi=400)
 ```
 
-## Differential abundance test (Organ.material)
+## Differential abundance test (Tree_parts)
 ```{r}
 tmp <- clone(meco)
 tmp$filter_taxa(rel_abund = 0.001, freq = 0.2)
@@ -425,7 +577,7 @@ colnames(tax) = "Class_Genus"
 difab$tax_table = tax
 difab = difab$merge_taxa("Class_Genus")
 
-t1 <- trans_diff$new(dataset = difab, method = "ancombc2", group = "Organ.material", fix_formula = "Organ.material", taxa_level = "Class_Genus", pairwise = TRUE)
+t1 <- trans_diff$new(dataset = difab, method = "ancombc2", group = "Tree_parts", fix_formula = "Tree_parts", taxa_level = "Class_Genus", pairwise = TRUE)
 
 res_convert <- data.frame()
 tmp_res = t1$res_diff_raw$res_pair
@@ -458,25 +610,25 @@ res = as_tibble(t1$res_diff) %>%
 ```{r }
 diff = str_split(unique(filter(res, passed_ss == T & diff == T)$Taxa), "\\|", simplify = TRUE)
 
-Needles = str_split(unique(filter(res, Factors == "Organ.materialNeedles" & lfc > 0 & passed_ss == T & diff == T | 
-	Factors == "Organ.materialShavings_Organ.materialNeedles" & lfc < 0 & passed_ss == T & diff == T )$Taxa ), "\\|", simplify = TRUE)
+Needles = str_split(unique(filter(res, Factors == "Tree_partsNeedles" & lfc > 0 & passed_ss == T & diff == T | 
+	Factors == "Tree_partsFresh_wood_Tree_partsNeedles" & lfc < 0 & passed_ss == T & diff == T )$Taxa ), "\\|", simplify = TRUE)
 
-Shavings = str_split(unique(filter(res, Factors == "Organ.materialShavings" & lfc > 0 & passed_ss == T & diff == T | 
-	Factors == "Organ.materialShavings_Organ.materialNeedles" & lfc > 0 & passed_ss == T & diff == T )$Taxa ), "\\|", simplify = TRUE)
+Fresh_wood = str_split(unique(filter(res, Factors == "Tree_partsFresh_wood" & lfc > 0 & passed_ss == T & diff == T | 
+	Factors == "Tree_partsFresh_wood_Tree_partsNeedles" & lfc > 0 & passed_ss == T & diff == T )$Taxa ), "\\|", simplify = TRUE)
 
-Branch = str_split(unique(filter(res, Factors == "Organ.materialShavings" & lfc < 0 & passed_ss == T & diff == T  | 
-	Factors == "Organ.materialNeedles" & lfc < 0 & passed_ss == T & diff == T )$Taxa ), "\\|", simplify = TRUE)
+Branch = str_split(unique(filter(res, Factors == "Tree_partsFresh_wood" & lfc < 0 & passed_ss == T & diff == T  | 
+	Factors == "Tree_partsNeedles" & lfc < 0 & passed_ss == T & diff == T )$Taxa ), "\\|", simplify = TRUE)
 
 Needles = as_tibble(Needles)
 Needles$diff = "Needles"
 
-Shavings = as_tibble(Shavings)
-Shavings$diff = "Shavings"
+Fresh_wood = as_tibble(Fresh_wood)
+Fresh_wood$diff = "Fresh_wood"
 
 Branch = as_tibble(Branch)
 Branch$diff = "Branch"
 
-all = rbind(Needles, Shavings, Branch) %>%
+all = rbind(Needles, Fresh_wood, Branch) %>%
 	arrange(V1) %>%
 	group_by(V1) %>%
 	nest(data = diff) %>%
@@ -488,19 +640,21 @@ names(diff_all) = all$V1
 psq <- meco2phyloseq(tmp)
 
 psq = psq %>%
-	merge_samples("Organ.material") %>%
+	merge_samples("Tree_parts") %>%
 	tax_transform("compositional", rank = "Class_Genus") %>%
 	tax_select(diff, ranks_searched = "Class_Genus", strict_matches = T) 
+
+psq = subset_taxa(psq, !(Class_Genus %in% str_extract(tax_table(psq)[,"Class_Genus"], ".*un.")))
 
 diff_all = diff_all[taxa_names(psq)]
 
 col_fun = distinct_palette(n = length(unique(all$type)), add = NA)
 names(col_fun) =  unique(all$type)
 
-png("../fig 9. Heatmap Organ.material (ITS).png", width=7, height=6, units = "in", res=400)
+png("../fig 11. Heatmap Tree_parts (ITS).png", width=7, height=6, units = "in", res=400)
 htmp = psq %>%
 	comp_heatmap(name = "Relative abundance", sample_names_show = T, numbers_use_counts = FALSE,
-		numbers = heat_numbers(decimals = 3), cluster_columns = F, column_order = c("Branch", "Needles", "Shavings"),
+		numbers = heat_numbers(decimals = 3), cluster_columns = F, column_order = c("Branch", "Needles", "Fresh_wood"),
 		right_annotation = rowAnnotation(Enriched_in = diff_all, col = list(Enriched_in = col_fun), 
 			show_annotation_name = c(Enriched_in = FALSE),
 			annotation_legend_param = list(Enriched_in = list(title = "Enriched in"))),
@@ -512,7 +666,6 @@ htmp = psq %>%
 	) 
 draw(htmp, heatmap_legend_side = "bottom")
 dev.off()
-
 ```
 ## Differential abundance test (Season)
 ```{r }
@@ -530,24 +683,10 @@ t1 <- trans_diff$new(dataset = difab, method = "ancombc2", group = "Season", tax
 
 ```{r }
 diff = str_split(unique(filter(t1$res_diff, Factors == "SeasonWinter", passed_ss == T & diff == T)$Taxa), "\\|", simplify = TRUE)
-
-psq <- meco2phyloseq(tmp)
-
-psq = psq %>%
-	merge_samples("Season") %>%
-	tax_transform("compositional", rank = "Class_Genus") %>%
-	tax_select(diff, ranks_searched = "Class_Genus", strict_matches = T) 
-
-png("Heatmap Season (ITS).png", width=7, height=6, units = "in", res=400)
-htmp = psq %>%
-	comp_heatmap(name = "Relative abundance", sample_names_show = T, numbers_use_counts = FALSE,
-	numbers = heat_numbers(decimals = 3), cluster_columns = F, column_order = c("Summer", "Winter")) 
-draw(htmp)
-dev.off()
-
+diff
 ```
 
-## Differential abundance test (Plant)
+## Differential abundance test (Tree_specimens)
 ```{r }
 difab = clone(tmp)
 tax = as.data.frame(difab$tax_table[,"Class_Genus"])
@@ -557,21 +696,23 @@ difab$tax_table = tax
 difab = difab$merge_taxa("Class_Genus")
 
 difab$tidy_dataset()
-t1 <- trans_diff$new(dataset = difab, method = "ancombc2", group = "Plant", taxa_level = "Class_Genus")
+t1 <- trans_diff$new(dataset = difab, method = "ancombc2", group = "Tree_specimens", taxa_level = "Class_Genus")
 
 ```
 
 ```{r }
-diff = str_split(unique(filter(t1$res_diff, Factors == "PlantPj_2", passed_ss == T & diff == T)$Taxa), "\\|", simplify = TRUE)
+diff = str_split(unique(filter(t1$res_diff, Factors == "Tree_specimensPj_2", passed_ss == T & diff == T)$Taxa), "\\|", simplify = TRUE)
 
 psq <- meco2phyloseq(tmp)
 
 psq = psq %>%
-	merge_samples("Plant") %>%
+	merge_samples("Tree_specimens") %>%
 	tax_transform("compositional", rank = "Class_Genus") %>%
 	tax_select(diff, ranks_searched = "Class_Genus", strict_matches = T) 
 
-png("../fig S11. Heatmap Plant (ITS).png", width=7, height=6, units = "in", res=400)
+psq = subset_taxa(psq, !(Class_Genus %in% str_extract(tax_table(psq)[,"Class_Genus"], ".*un.")))
+
+png("../fig S12. Heatmap Tree_specimens (ITS).png", width=7, height=6, units = "in", res=400)
 htmp = psq %>%
 	comp_heatmap(name = "Relative abundance", sample_names_show = T, numbers_use_counts = FALSE,
 	numbers = heat_numbers(decimals = 3), cluster_columns = F, column_order = c("Pj_1", "Pj_2")) 
