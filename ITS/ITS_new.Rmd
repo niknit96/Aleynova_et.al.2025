@@ -556,9 +556,9 @@ p1 <- plot_core(pseq.rel,
   detections = detections, min.prevalence = .5) +
   xlab("Detection Threshold (Relative Abundance (%))")
 
-p1 <- p1 + theme_bw() + ylab("Taxa") + scale_x_discrete(labels = paste0(round(detections * 100, 0), "%")) +
+p1 <- p1 + theme_bw() + ylab("") + scale_x_discrete(labels = round(detections * 100, 0)) +
 	scale_fill_gradientn(labels = scales::percent, breaks = prevalences, colours = rev(brewer.pal(5, "RdBu")),
-    values = c(0, 0.25, 0.5, 0.75, 1))
+    values = c(0, 0.25, 0.5, 0.75, 1)) + labs(fill = "Frequency of\noccurrence")
 p1
 ggsave("../fig 10. core (ITS).png", width=8, height=3, dpi=400)
 ```
