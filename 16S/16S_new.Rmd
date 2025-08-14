@@ -757,13 +757,13 @@ df <- ko_table %>%
 	select(level1, level2, level3, level4, abund) %>%
 	group_by(level1, level2, level3, level4) %>%
 	reframe(abund = sum(abund)) %>%
-	mutate(level2 = ifelse(level4 %in% df_top$level4, level2, paste0(level1, " OTHER"))) %>%
+	mutate(level2 = ifelse(level4 %in% df_top$level4, level2, paste0("OTHER ", level2))) %>%
 	mutate(level3 = ifelse(level2 %in% df_top$level2, level3, NA)) %>%
 	mutate(level4 = ifelse(level2 %in% df_top$level2, level4, NA)) %>%
 	group_by(level1, level2, level3, level4) %>%
 	reframe(abund = sum(abund)) %>%
 	ungroup() %>%
-	filter(level1 != "No PGPT", level2 != "PUTATIVE_PGPTs") %>%
+	filter(level1 != "No PGPT", level2 != "PUTATIVE_PGPTs", level2 != "OTHER PUTATIVE_PGPTs") %>%
 	# na.omit() %>%
 	make_long(level1, level2, level3, level4, value = abund) %>%
 	filter(node != "NA")
